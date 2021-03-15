@@ -24,7 +24,7 @@ echo ""
 echo ""
 echo "LETS GO!"
 
-apt install curl wget apt-transport-https dirmngr -y
+apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
 echo "
 #------------------------------------------------------------------------------#
 #                   OFFICIAL DEBIAN REPOS                    
