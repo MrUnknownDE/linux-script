@@ -41,7 +41,8 @@ tar xvf prometheus*.tar.gz
 cd prometheus*/
 sudo mv prometheus promtool /usr/local/bin/
 sudo mv prometheus.yml  /etc/prometheus/prometheus.yml
-sudo echo "# my global config
+sudo echo "
+# my global config
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -75,7 +76,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9100']" > /etc/prometheus/prometheus.yml
 
-sudo echo "
+sudo echo "<<EOF
 [Unit]
 Description=Prometheus
 Documentation=https://prometheus.io/docs/introduction/overview/
@@ -100,11 +101,10 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
-EOF; done
+EOF" > /etc/systemd/system/prometheus.service
 for i in rules rules.d files_sd; do sudo chown -R prometheus:prometheus /etc/prometheus/${i}; done
 for i in rules rules.d files_sd; do sudo chmod -R 775 /etc/prometheus/${i}; done
-sudo chown -R prometheus:prometheus /var/lib/prometheus/" > /etc/systemd/system/prometheus.service
-
+sudo chown -R prometheus:prometheus /var/lib/prometheus/
 
 echo "Install Node_Exporter"
 curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest \
@@ -117,7 +117,7 @@ tar -xvf node_exporter*.tar.gz
 cd  node_exporter*/
 sudo cp node_exporter /usr/local/bin
 
-sudo echo "
+sudo echo "<<EOF
 [Unit]
 Description=Node Exporter
 Wants=network-online.target
@@ -128,7 +128,8 @@ User=prometheus
 ExecStart=/usr/local/bin/node_exporter
 
 [Install]
-WantedBy=default.target" > /etc/systemd/system/node_exporter.service
+WantedBy=default.target
+EOF" > /etc/systemd/system/node_exporter.service
 
 sudo systemctl daemon-reload
 sudo systemctl start node_exporter
