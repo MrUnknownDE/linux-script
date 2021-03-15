@@ -23,7 +23,7 @@ echo ""
 echo ""
 echo ""
 echo "LETS GO!"
-
+apt update
 apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
 echo "
 #------------------------------------------------------------------------------#
