@@ -43,5 +43,6 @@ deb-src http://deb.debian.org/debian-security stable/updates main
 
 deb http://ftp.debian.org/debian buster-backports main
 deb-src http://ftp.debian.org/debian buster-backports main" > /etc/apt/source.list
+apt upgrade -y
 
 echo "Have Fun with Debian 10 Official Repos :)"
