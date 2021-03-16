@@ -1,6 +1,6 @@
 #/bin/bash
-echo "Mailserver Backup"
-echo "for Hetzner StorageBox!"
+echo "Mailserver Backup (for Mailcow)"
+echo "for Hetzner StorageBox! (at a Moment)"
 
 
 
