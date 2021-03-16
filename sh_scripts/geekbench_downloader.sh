@@ -26,6 +26,6 @@ echo "LETS GO!"
 
 wget https://cdn.geekbench.com/Geekbench-5.4.0-Linux.tar.gz
 tar xf Geekbench-5.4.0-Linux.tar.gz
-cd Geekbench-5.0.0-Linux/
+cd Geekbench-5.4.0-Linux/
 
 echo "Finish, run with ./geekbench5"

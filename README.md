@@ -17,7 +17,7 @@ Ram: 2GB <br><br>
 
 
 ## TS3AudioBot Installer
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/ts3audiobot_installer.sh')</code>
 
 
@@ -34,7 +34,7 @@ is not finished<br>
 
 
 ## Geekbench5 Downloader
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/geekbench_downloader.sh')</code>
 
 
@@ -42,7 +42,7 @@ is not finished<br>
 
 
 ## Cloudserver Repo Autoset
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red<br>
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red) ![](https://img.shields.io/badge/Ubuntu%2020.04%20-error-%20red)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/cloudserver_auto_repos.sh')</code>
 
 
@@ -50,5 +50,5 @@ is not finished<br>
 
 
 ## Prometheus + Grafana + Node_Exporter Quick Installer
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red) ![](https://img.shields.io/badge/Ubuntu%2020.04%20-error-%20red)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/prometheus.sh')</code>
