@@ -76,7 +76,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9100']" > /etc/prometheus/prometheus.yml
 
-sudo echo "<<EOF
+sudo echo "
 [Unit]
 Description=Prometheus
 Documentation=https://prometheus.io/docs/introduction/overview/
@@ -100,8 +100,7 @@ SyslogIdentifier=prometheus
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
-EOF" > /etc/systemd/system/prometheus.service
+WantedBy=multi-user.target" > /etc/systemd/system/prometheus.service
 for i in rules rules.d files_sd; do sudo chown -R prometheus:prometheus /etc/prometheus/${i}; done
 for i in rules rules.d files_sd; do sudo chmod -R 775 /etc/prometheus/${i}; done
 sudo chown -R prometheus:prometheus /var/lib/prometheus/
@@ -117,7 +116,7 @@ tar -xvf node_exporter*.tar.gz
 cd  node_exporter*/
 sudo cp node_exporter /usr/local/bin
 
-sudo echo "<<EOF
+sudo echo "
 [Unit]
 Description=Node Exporter
 Wants=network-online.target
@@ -128,8 +127,7 @@ User=prometheus
 ExecStart=/usr/local/bin/node_exporter
 
 [Install]
-WantedBy=default.target
-EOF" > /etc/systemd/system/node_exporter.service
+WantedBy=default.target" > /etc/systemd/system/node_exporter.service
 
 
 sudo apt install -y apt-transport-https

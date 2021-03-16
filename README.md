@@ -44,3 +44,11 @@ is not finished<br>
 ## Cloudserver Repo Autoset
 ![https://img.shields.io/badge/Debian%2010-work!-green](https://img.shields.io/badge/Debian%2010-work!-green) ![https://img.shields.io/badge/Debian%209-work!-green](https://img.shields.io/badge/Debian%209-work-green) ![https://img.shields.io/badge/Ubuntu%2018.04-work!-green](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/cloudserver_auto_repos.sh')</code>
+
+
+-----
+
+
+## Prometheus + Grafana + Node_Exporter Quick Installer
+![https://img.shields.io/badge/Debian%2010-work!-green](https://img.shields.io/badge/Debian%2010-work!-green) ![https://img.shields.io/badge/Debian%209-work!-green](https://img.shields.io/badge/Debian%209-work-green) ![https://img.shields.io/badge/Ubuntu%2018.04-work!-green](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/prometheus.sh')</code>
