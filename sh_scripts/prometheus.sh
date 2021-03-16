@@ -3,7 +3,7 @@ clear
 echo "################################################"
 echo "#                                              #"
 echo "#                                              #"
-echo "#                 Prometheus                   #"
+echo "#             Prometheus + Grafana             #"
 echo "#               Quick Installer                #"
 echo "#                                              #"
 echo "#                    by                        #"
@@ -31,7 +31,7 @@ for i in rules rules.d files_sd; do sudo mkdir -p /etc/prometheus/${i}; done
 
 sudo apt-get -y install wget
 mkdir -p /tmp/prometheus && cd /tmp/prometheus
-curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest \
+curl -s "https://api.github.com/repos/prometheus/prometheus/releases/latest" \
   | grep browser_download_url \
   | grep linux-amd64 \
   | cut -d '"' -f 4 \
@@ -107,7 +107,7 @@ for i in rules rules.d files_sd; do sudo chmod -R 775 /etc/prometheus/${i}; done
 sudo chown -R prometheus:prometheus /var/lib/prometheus/
 
 echo "Install Node_Exporter"
-curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest \
+curl -s "https://api.github.com/repos/prometheus/node_exporter/releases/latest" \
 | grep browser_download_url \
 | grep linux-amd64 \
 | cut -d '"' -f 4 \
@@ -131,19 +131,38 @@ ExecStart=/usr/local/bin/node_exporter
 WantedBy=default.target
 EOF" > /etc/systemd/system/node_exporter.service
 
+
+sudo apt install -y apt-transport-https
+sudo apt install -y software-properties-common wget
+wget -q -O - "https://packages.grafana.com/gpg.key" | sudo apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+sudo apt update
+sudo apt install grafana -y
+
+
+
 sudo systemctl daemon-reload
-sudo systemctl start node_exporter
-sudo systemctl start prometheus
+sudo systemctl enable grafana-server.service
 sudo systemctl enable node_exporter
 sudo systemctl enable prometheus
+sudo systemctl start node_exporter
+sudo systemctl start prometheus
+sudo systemctl start grafana-server
+
+
+
 
 echo "###############################################################################"
 echo ""
 echo "DE >"
 echo "Wenn alles geklappt hat, funktioniert Prometheus und Node_Exporter wunderbar!"
-echo "Beides kannst du unter http://<IP>:9090/ und http://<IP>:9100 erreichen"
+echo "Beides kannst du unter http://<IP>:9090/, http://<IP>:9100"
+echo "und"
+echo "http://<IP>:3000/ erreichen"
 echo "EN >"
 echo "If everything went well, Prometheus and Node_Exporter will work wonderfully!"
-echo "You can access both at http://<IP>:9090/ and http://<IP>:9100"
+echo "You can access both at http://<IP>:9090/, http://<IP>:9100"
+echo "and"
+echo "http://<IP>:3000/ to reach"
 echo ""
 echo "###############################################################################"
