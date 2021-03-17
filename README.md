@@ -52,3 +52,12 @@ is not finished<br>
 ## Prometheus + Grafana + Node_Exporter Quick Installer
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green)![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/prometheus.sh')</code>
+
+
+-----
+
+
+## Python Quick Build and Install
+Version: 3.9.2
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green)![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/python-quick-build.sh')</code>
