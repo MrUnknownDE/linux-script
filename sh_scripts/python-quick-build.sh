@@ -29,7 +29,7 @@ sudo apt update
 sudo apt -y upgrade
 sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev -y
 wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
-tar -xf Python3-3.9.2.tgz
+tar -xf Python-3.9.2.tgz
 cd Python-3.9.2
 ./configure --enable-optimizations
 make -j $CPUCORES
