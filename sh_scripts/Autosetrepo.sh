@@ -29,18 +29,40 @@ echo ""
 echo ""
 echo ""
 echo "LETS GO!"
-apt-get update;
 
 case "$SYSTEM" in 
     "Debian GNU/Linux 10 \n \l")
+        apt-get update
         apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
-        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-18.04.txt" -o /etc/apt/source.list
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-10.txt" -o /etc/apt/source.list
+        apt update && apt upgrade -y
+        echo "Have Fun with the Official Repos :)"
+        ;;
+    "Debian GNU/Linux 9 \n \l")
+        apt-get update 
+        apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-9.txt" -o /etc/apt/source.list
+        apt update && apt upgrade -y
+        echo "Have Fun with the Official Repos :)"
+        ;;
+    "Debian GNU/Linux 11 \n \l")
+        apt-get update
+        apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/source.list
         apt update && apt upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
     "Ubuntu 18.04.5 LTS \n \l")
+        apt-get update
         apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
-        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-10.txt" -o /etc/apt/source.list
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-18.04.txt" -o /etc/apt/source.list
+        apt-get update && apt-get upgrade -y
+        echo "Have Fun with the Official Repos :)"
+        ;;
+    "Ubuntu 16.04.7 LTS \n \l")
+        apt-get update
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-16.04.txt" -o /etc/apt/source.list
         apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
