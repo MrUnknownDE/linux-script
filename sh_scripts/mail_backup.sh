@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 echo "Mailserver Backup (for Mailcow)"
 echo "for Hetzner StorageBox! (at a Moment)"
 

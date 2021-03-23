@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 CPUCORES=$(grep ^processor /proc/cpuinfo | wc -l)
 clear
 echo "################################################"

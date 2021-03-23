@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # TS3AudioBot Installer
 # Init
 FILE="/tmp/out.$$"
