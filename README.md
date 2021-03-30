@@ -10,7 +10,7 @@ Distribution: Debian 9-10 / Ubuntu 16.04 - 18.04<br>
 CPU: 1 vCore <br>
 Ram: 2GB <br><br>
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/spigot_autobild.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBMI')</code>
 
 
 -----
@@ -18,7 +18,7 @@ Ram: 2GB <br><br>
 
 ## TS3AudioBot Installer
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/ts3audiobot_installer.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBMG')</code>
 
 
 -----
@@ -27,7 +27,7 @@ Ram: 2GB <br><br>
 ## System - Info
 ![](https://img.shields.io/badge/Debian%2010%20-%20error%20-%20red) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red) <br> <br>
 is not finished<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/system_info.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBM8')</code>
 
 
 -----
@@ -35,7 +35,7 @@ is not finished<br>
 
 ## Geekbench5 Downloader
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/geekbench_downloader.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBME')</code>
 
 
 -----
@@ -43,7 +43,7 @@ is not finished<br>
 
 ## Repo Autosetrepo
 ![](https://img.shields.io/badge/Debian%2011-testing!-black) ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu--18.04-work!-green) ![](https://img.shields.io/badge/Ubuntu--16.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/Autosetrepo.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBMr')</code>
 
 
 -----
@@ -51,7 +51,7 @@ is not finished<br>
 
 ## Prometheus + Grafana + Node_Exporter Quick Installer
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/prometheus.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBMi')</code>
 
 
 -----
@@ -60,4 +60,12 @@ is not finished<br>
 ## Python Quick Build and Install
 Version: 3.9.2
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
-<code>bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/python-quick-build.sh')</code>
+<code>bash <(wget -O - 'https://git.io/JYBMM')</code>
+
+
+-----
+
+
+## Speedtest
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+<code>bash <(wget -O - 'https://git.io/JYBM7')</code>

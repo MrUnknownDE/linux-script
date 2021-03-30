@@ -29,7 +29,8 @@ wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifac
 clear
 
 echo "Checking software packages ..."
-apt-get install git default-jdk -y > /dev/null
+apt-get update
+apt-get install git default-jdk -y
 echo "start building ..."
 sleep 2
 java -jar BuildTools.jar
