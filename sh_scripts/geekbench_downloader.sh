@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#                Geekbench 5                   #"
 echo "#                Downloader                    #"

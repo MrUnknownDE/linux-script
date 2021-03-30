@@ -2,7 +2,7 @@
 serviceIP=$(ip route get 8.8.8.8 | sed -n '/src/{s/.*src *\([^ ]*\).*/\1/p;q}')
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#             Prometheus + Grafana             #"
 echo "#               Quick Installer                #"

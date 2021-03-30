@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Version: 0.1"
 echo "Mailserver Backup (for Mailcow)"
 echo "for Hetzner StorageBox! (at a Moment)"
 

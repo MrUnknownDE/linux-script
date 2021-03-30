@@ -2,7 +2,7 @@
 CPUCORES=$(grep ^processor /proc/cpuinfo | wc -l)
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#                Python3.9.2                   #"
 echo "#                Quick Build                   #"

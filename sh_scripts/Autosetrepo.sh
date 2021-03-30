@@ -7,7 +7,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#                  Linux                       #"
 echo "#          Automatically Repo edit             #"

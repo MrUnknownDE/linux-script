@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#                System_Info                   #"
 echo "#                    by                        #"

@@ -13,7 +13,7 @@ fi
 
 clear
 echo "################################################"
-echo "#                                              #"
+echo "# Version: 0.1v                                #"
 echo "#                                              #"
 echo "#                TS3AudioBot                   #"
 echo "#                 Installer                    #"
