@@ -66,6 +66,13 @@ case "$SYSTEM" in
         apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
+    "Ubuntu 20.04.2 LTS \n \l")
+        apt-get update
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-20.04.txt" -o /etc/apt/source.list
+        apt-get update && apt-get upgrade -y
+        echo "Have Fun with the Official Repos :)"
+        ;;
     *)
         clear
         echo "DE >"
