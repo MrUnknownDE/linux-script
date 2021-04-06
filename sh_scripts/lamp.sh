@@ -104,6 +104,7 @@ clear
             sudo chown -R 33:33 /var/www/html/phpmyadmin
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
+            echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "
             Thank you for using this Script
             Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
@@ -149,6 +150,7 @@ clear
             sudo chown -R 33:33 /var/www/html/phpmyadmin
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
+            echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "
             Thank you for using this Script
             Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
