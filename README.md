@@ -77,3 +77,11 @@ Version: 3.9.2
 ## (L)inux(A)pache(M)ysql(P)HP  
 ![](https://img.shields.io/badge/Debian%2010%20-%20error%20-%20red) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red)<br>
 <code>bash <(wget -O - 'https://git.io/xxxxxx')</code>
+
+
+----
+
+
+## Password-Generator
+![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+<code>bash <(wget -O - 'https://git.io/JYA1y')</code>
