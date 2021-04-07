@@ -43,7 +43,7 @@ is not finished<br>
 
 ## Official Repo
 ![](https://img.shields.io/badge/Debian%2011-testing!-black) ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu--20.04-work!-green)![](https://img.shields.io/badge/Ubuntu--18.04-work!-green) ![](https://img.shields.io/badge/Ubuntu--16.04-work!-green)<br>
-<code>bash <(wget -O - 'https://git.io/JYBMr')</code>
+<code>bash <(wget -O - 'https://git.io/JYN1M')</code>
 
 
 -----
