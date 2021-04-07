@@ -29,9 +29,17 @@ GEN_PASS=$(
 for ((n=0;n<1;n++))
 do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
 done)
-MYSQL_ROOT_PASSWORD="5kze2%!Np@U#rbi@ubvn"
-MYSQL_MYSQLADMIN_PASSWORD="rU@DPsd3NyDJ*8x#m4z$MXuoYAL#svjv"
-PHPMYADMIN_PASSPHRASE="3$HyzXf#NX!R*WdiYXvvR3fKmgMQHW^CgsjV4KWK^7&fNUaMZZx3FGF2t!V&*bVFs!9$4JSZC7D%vtfnMHZyKKcAGR8gESTQVx^xs2TwodhBJQF9srt^SYatvJE*jkXx"
+GEN_PASS2=$(
+for ((n=0;n<1;n++))
+do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
+done)
+GEN_PASS3=$(
+for ((n=0;n<1;n++))
+do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
+done)
+MYSQL_MYSQLADMIN_PASSWORD=$GEN_PASS
+MYSQL_ROOT_PASSWORD=$GEN_PASS2
+PHPMYADMIN_PASSPHRASE="$GEN_PASS3"
 
 SECURE_MYSQL=$(expect -c "
 set timeout 10
@@ -56,16 +64,17 @@ expect eof
 ")
 serviceIP=$(ip route get 8.8.8.8 | sed -n '/src/{s/.*src *\([^ ]*\).*/\1/p;q}')
 
-HEIGHT=10
+HEIGHT=15
 WIDTH=70
-CHOICE_HEIGHT=4
+CHOICE_HEIGHT=5
 BACKTITLE="(L)inux(A)apache(M)ysql(P)HP Installer - $VERSION"
 TITLE="Has LAMP ever been installed on this instance?"
 MENU="Choose one of the following options:"
 
 OPTIONS=(1 "No"
          2 "Yes"
-         3 "Exit")
+         3 "Exit"
+         4 "testing...")
 
 CHOICE=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
@@ -135,6 +144,13 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
             cat installer-log.txt 
             ;;
+        4)
+            echo "DB Root Passwort: $MYSQL_ROOT_PASSWORD"
+            echo "DB Root GEN PASSWORT:$MYSQL_ROOT_GEN_PASSWORD"
+            echo "DB Root GEN PASSWORT 2:$MYSQL_ROOT_GEN_PASSWORD"
+            echo "DB Admin Passwort: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
+            echo "DB Admin Passwort 2: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
+            ;;
         2) # - Yes
             echo "Here where go again :)"
             sudo apt update
@@ -177,11 +193,11 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             
             MySQL-Login (localhost)
             user: root
-            password: $MYSQL_ROOT_PASSWORD (Please change this password! It is static )
+            password: $MYSQL_ROOT_PASSWORD
 
             phpMyAdmin-Login
             user: mysqladmin
-            password: $MYSQL_MYSQLADMIN_PASSWORD (Please change this password! It is static)
+            password: $MYSQL_MYSQLADMIN_PASSWORD
             
             You want to improve my script or have a wish then open an issues on Github :)
             >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
