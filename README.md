@@ -25,9 +25,9 @@ Ram: 2GB <br><br>
 
 
 ## System - Info
-![](https://img.shields.io/badge/Debian%2010%20-%20error%20-%20red) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red) <br> <br>
+![](https://img.shields.io/badge/Debian%2010%20-%20error%20-%20red) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red)<br>
 is not finished<br>
-<code>bash <(wget -O - 'https://git.io/JYBM8')</code>
+<code>bash <(wget -O - 'https://git.io/xxxx')</code>
 
 
 -----
@@ -41,7 +41,7 @@ is not finished<br>
 -----
 
 
-## Repo Autosetrepo
+## Official Repo
 ![](https://img.shields.io/badge/Debian%2011-testing!-black) ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu--20.04-work!-green)![](https://img.shields.io/badge/Ubuntu--18.04-work!-green) ![](https://img.shields.io/badge/Ubuntu--16.04-work!-green)<br>
 <code>bash <(wget -O - 'https://git.io/JYBMr')</code>
 
@@ -69,3 +69,11 @@ Version: 3.9.2
 ## Speedtest
 ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://git.io/JYBM7')</code>
+
+
+-----
+
+
+## (L)inux(A)pache(M)ysql(P)HP  
+![](https://img.shields.io/badge/Debian%2010%20-%20error%20-%20red) ![](https://img.shields.io/badge/Debian%209%20-%20error%20-%20red) ![](https://img.shields.io/badge/Ubuntu%2018.04%20-error-%20red)<br>
+<code>bash <(wget -O - 'https://git.io/xxxxxx')</code>
