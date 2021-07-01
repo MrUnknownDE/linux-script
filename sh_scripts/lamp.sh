@@ -91,18 +91,12 @@ clear
             echo "start installer" # - start the normal installer
             sudo apt update
             sudo apt upgrade -y
-            sudo apt install apache2 apache2-utils mariadb-server mariadb-client -y 
+            sudo apt install wget apache2 apache2-utils mariadb-server mariadb-client lsb-release ca-certificates apt-transport-https software-properties-common-y 
             echo "$SECURE_MYSQL"
-            sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline -y 
-            sudo a2enmod php7.3
-            sudo systemctl restart apache2
-            sudo a2dismod php7.3
-            sudo apt install php7.3-fpm -y 
-            sudo a2enmod proxy_fcgi setenvif
-            sudo a2enconf php7.3-fpm
-            sudo systemctl restart apache2
-            sudo apt install wget -y 
-            sudo apt install php php-cgi php-mysqli php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql -y
+            echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
+            wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
+            apt update
+            sudo apt install php php-cgi php-mysqli php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql php8.0-bcmath php8.0-curl-dbgsym php8.0-gmp-dbgsym php8.0-mysql php8.0-pspell-dbgsym php8.0-tidy php8.0-bcmath-dbgsym php8.0-dba php8.0-imap php8.0-mysql-dbgsym php8.0-readline php8.0-tidy-dbgsym php8.0-bz2 php8.0-dba-dbgsym php8.0-imap-dbgsym php8.0-odbc php8.0-readline-dbgsym php8.0-xdebug php8.0-bz2-dbgsym php8.0-dev php8.0-interbase php8.0-odbc-dbgsym php8.0-snmp php8.0-xml php8.0-cgi php8.0-enchant php8.0-interbase-dbgsym  php8.0-opcache php8.0-snmp-dbgsym php8.0-xml-dbgsym php8.0-cgi-dbgsym php8.0-enchant-dbgsym php8.0-intl php8.0-opcache-dbgsym php8.0-soap php8.0-xsl php8.0-cli php8.0-fpm php8.0-intl-dbgsym php8.0-pgsql php8.0-soap-dbgsym php8.0-zip php8.0-cli-dbgsym php8.0-fpm-dbgsym php8.0-ldap php8.0-pgsql-dbgsym php8.0-sqlite3 php8.0-zip-dbgsym php8.0-common php8.0-gd php8.0-ldap-dbgsym php8.0-phpdbg php8.0-sqlite3-dbgsym php8.0-common-dbgsym php8.0-gd-dbgsym php8.0-mbstring php8.0-phpdbg-dbgsym php8.0-sybase php8.0-curl php8.0-gmp php8.0-mbstring-dbgsym php8.0-pspell php8.0-sybase-dbgsym -y
             wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
             wget -P Downloads https://files.phpmyadmin.net/phpmyadmin.keyring
             gpg --import ~/Downloads/phpmyadmin.keyring
@@ -128,6 +122,17 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
+            rm -r /var/www/html/*
+            wget -p /var/www/html/index.html https://static.syslul.de/src/johannes/
+            clear
+            echo "Do you want to have a domain certified by Let's Encrypt?"
+            read answer
+            if &#91; "$answer" != "yes" &#93;; then
+                apt install certbot python-certbot-apache -y
+                
+            exit 1
+            fi
+            
             echo "
             Thank you for using this Script
             Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
@@ -152,56 +157,21 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             echo "DB Admin Passwort 2: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
             ;;
         2) # - Yes
-            echo "Here where go again :)"
-            sudo apt update
-            sudo apt upgrade
-            sudo apt remove apache2 mariadb-server mariadb-client php7.3 libapache2-mod-php7.3 php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline apache2-utils php7.3-fpm php php-cgi php-mysqli php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql -y
-            sudo apt-get autoremove -y
-            sudo rm -r /var/www/*
-            echo ""
-            echo "start installer" # - start the normal installer
-            sudo apt update
-            sudo apt upgrade -y
-            sudo apt -o DPkg::options::=--force-confmiss --reinstall install apache2 apache2-utils mariadb-server mariadb-client -y 
-            echo "$SECURE_MYSQL"
-            sudo apt -o DPkg::options::=--force-confmiss --reinstall install php7.3 libapache2-mod-php7.3 php7.3-mysql php-common php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline -y 
-            sudo a2enmod php7.3
-            sudo systemctl restart apache2
-            sudo a2dismod php7.3
-            sudo apt -o DPkg::options::=--force-confmiss --reinstall install php7.3-fpm -y 
-            sudo a2enmod proxy_fcgi setenvif
-            sudo a2enconf php7.3-fpm
-            sudo systemctl restart apache2
-            sudo apt install wget -y 
-            sudo apt -o DPkg::options::=--force-confmiss --reinstall install php php-cgi php-mysqli php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql -y
-            wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
-            wget -P Downloads https://files.phpmyadmin.net/phpmyadmin.keyring
-            gpg --import ~/Downloads/phpmyadmin.keyring
-            wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz.asc
-            gpg --verify ~/Downloads/phpMyAdmin-latest-all-languages.tar.gz.asc
-            mkdir /var/www/html/phpmyadmin
-            sudo tar xvf ~/Downloads/phpMyAdmin-latest-all-languages.tar.gz --strip-components=1 -C /var/www/html/phpmyadmin
-            sudo cp /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php
-            sudo chmod 660 /var/www/html/phpmyadmin/config.inc.php
-            sudo chown -R 33:33 /var/www/html/phpmyadmin
-            sudo systemctl restart apache2
-            echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
-            echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
-            echo "
-            Thank you for using this Script
-            Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
-            
-            MySQL-Login (localhost)
-            user: root
-            password: $MYSQL_ROOT_PASSWORD
+            HEIGHT=15
+            WIDTH=70
+            CHOICE_HEIGHT=5
+            BACKTITLE="(L)inux(A)apache(M)ysql(P)HP Installer - $VERSION"
+            TITLE="Then please reinstall the server or uninstall the existing LAMP"
+            MENU="Choose one of the following options:"
 
-            phpMyAdmin-Login
-            user: mysqladmin
-            password: $MYSQL_MYSQLADMIN_PASSWORD
-            
-            You want to improve my script or have a wish then open an issues on Github :)
-            >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
-            echo "Finish, more information on the installer-log.txt in you home dir"
+            OPTIONS=(1 "okey")
+            dialog --clear \
+                   --backtitle "$BACKTITLE" \
+                   --title "$TITLE" \
+                   --menu "$MENU" \
+                   $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                   "${OPTIONS[@]}" \
+                   2>&1 >/dev/tty
             ;;
         3) # - Exit/Quit
             clear
