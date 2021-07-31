@@ -33,23 +33,23 @@ echo "LETS GO!"
 case "$SYSTEM" in 
     "Debian GNU/Linux 10 \n \l")
         apt-get update
-        apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
         curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-10.txt" -o /etc/apt/source.list
-        apt update && apt upgrade -y
+        apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
     "Debian GNU/Linux 9 \n \l")
         apt-get update 
-        apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
         curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-9.txt" -o /etc/apt/source.list
-        apt update && apt upgrade -y
+        apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
     "Debian GNU/Linux 11 \n \l")
         apt-get update
-        apt install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
         curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/source.list
-        apt update && apt upgrade -y
+        apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
     "Ubuntu 18.04.5 LTS \n \l")
