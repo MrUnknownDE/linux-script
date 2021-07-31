@@ -1,6 +1,6 @@
 #!/bin/bash
 # Make sure only root can run our script
-VERSION="Version: 0.6v"
+VERSION="Version: 0.8v"
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
    exit 1
@@ -24,7 +24,9 @@ echo "################################################"
 echo ""
 echo "It will now install the following packages: dialog, expect, sharutils, Debian-Repos"
 sleep 2
-bash <(wget -O - 'https://git.io/JYN1M')
+echo "Install Debian-Repos"
+bash <(wget -O - 'https://git.io/JYN1M') > /dev/null
+echo "ok."
 sudo apt update && apt install dialog expect sharutils -y
 GEN_PASS=$(
 for ((n=0;n<1;n++))
@@ -97,7 +99,7 @@ clear
             echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
             wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
             apt update
-            sudo apt install php php-cgi php-mysqli php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql php8.0-bcmath php8.0-curl-dbgsym php8.0-gmp-dbgsym php8.0-mysql php8.0-pspell-dbgsym php8.0-tidy php8.0-bcmath-dbgsym php8.0-dba php8.0-imap php8.0-mysql-dbgsym php8.0-readline php8.0-tidy-dbgsym php8.0-bz2 php8.0-dba-dbgsym php8.0-imap-dbgsym php8.0-odbc php8.0-readline-dbgsym php8.0-xdebug php8.0-bz2-dbgsym php8.0-dev php8.0-interbase php8.0-odbc-dbgsym php8.0-snmp php8.0-xml php8.0-cgi php8.0-enchant php8.0-interbase-dbgsym  php8.0-opcache php8.0-snmp-dbgsym php8.0-xml-dbgsym php8.0-cgi-dbgsym php8.0-enchant-dbgsym php8.0-intl php8.0-opcache-dbgsym php8.0-soap php8.0-xsl php8.0-cli php8.0-fpm php8.0-intl-dbgsym php8.0-pgsql php8.0-soap-dbgsym php8.0-zip php8.0-cli-dbgsym php8.0-fpm-dbgsym php8.0-ldap php8.0-pgsql-dbgsym php8.0-sqlite3 php8.0-zip-dbgsym php8.0-common php8.0-gd php8.0-ldap-dbgsym php8.0-phpdbg php8.0-sqlite3-dbgsym php8.0-common-dbgsym php8.0-gd-dbgsym php8.0-mbstring php8.0-phpdbg-dbgsym php8.0-sybase php8.0-curl php8.0-gmp php8.0-mbstring-dbgsym php8.0-pspell php8.0-sybase-dbgsym -y
+            sudo apt install php php-cgi php-mysql php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql php8.0-bcmath php8.0-curl-dbgsym php8.0-gmp-dbgsym php8.0-mysql php8.0-pspell-dbgsym php8.0-tidy php8.0-bcmath-dbgsym php8.0-dba php8.0-imap php8.0-mysql-dbgsym php8.0-readline php8.0-tidy-dbgsym php8.0-bz2 php8.0-dba-dbgsym php8.0-imap-dbgsym php8.0-odbc php8.0-readline-dbgsym php8.0-xdebug php8.0-bz2-dbgsym php8.0-dev php8.0-interbase php8.0-odbc-dbgsym php8.0-snmp php8.0-xml php8.0-cgi php8.0-enchant php8.0-interbase-dbgsym  php8.0-opcache php8.0-snmp-dbgsym php8.0-xml-dbgsym php8.0-cgi-dbgsym php8.0-enchant-dbgsym php8.0-intl php8.0-opcache-dbgsym php8.0-soap php8.0-xsl php8.0-cli php8.0-fpm php8.0-intl-dbgsym php8.0-pgsql php8.0-soap-dbgsym php8.0-zip php8.0-cli-dbgsym php8.0-fpm-dbgsym php8.0-ldap php8.0-pgsql-dbgsym php8.0-sqlite3 php8.0-zip-dbgsym php8.0-common php8.0-gd php8.0-ldap-dbgsym php8.0-phpdbg php8.0-sqlite3-dbgsym php8.0-common-dbgsym php8.0-gd-dbgsym php8.0-mbstring php8.0-phpdbg-dbgsym php8.0-sybase php8.0-curl php8.0-gmp php8.0-mbstring-dbgsym php8.0-pspell php8.0-sybase-dbgsym -y
             wget -P Downloads https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
             wget -P Downloads https://files.phpmyadmin.net/phpmyadmin.keyring
             gpg --import ~/Downloads/phpmyadmin.keyring
@@ -126,14 +128,19 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             rm -r /var/www/html/*
             wget -p /var/www/html/index.html https://static.syslul.de/src/johannes/
             clear
-            echo "Do you want to have a domain certified by Let's Encrypt?"
+            echo "Do you want to have a domain certified by Let's Encrypt? (yes/no)"
             read answer
-            if &#91; "$answer" != "yes" &#93;; then
+            if ["answer"="yes"]; then
                 apt install certbot python-certbot-apache -y
-                
-            exit 1
+                certbot register
+                echo "Domain Name:"
+                read domainname
+                certbot --apache -d $domainname
+                exit 1
             fi
-            
+            if ["answer"="no"]; then
+                exit 1
+            fi 
             echo "
             Thank you for using this Script
             Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
