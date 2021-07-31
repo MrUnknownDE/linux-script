@@ -22,8 +22,9 @@ echo "#                                              #"
 echo "#                                              #"
 echo "################################################"
 echo ""
-echo "It will now install the following packages: dialog, expect, sharutils"
+echo "It will now install the following packages: dialog, expect, sharutils, Debian-Repos"
 sleep 2
+bash <(wget -O - 'https://git.io/JYN1M')
 sudo apt update && apt install dialog expect sharutils -y
 GEN_PASS=$(
 for ((n=0;n<1;n++))
@@ -68,11 +69,11 @@ HEIGHT=15
 WIDTH=70
 CHOICE_HEIGHT=5
 BACKTITLE="(L)inux(A)apache(M)ysql(P)HP Installer - $VERSION"
-TITLE="Has LAMP ever been installed on this instance?"
+TITLE="Are you ready for the installation? "
 MENU="Choose one of the following options:"
 
-OPTIONS=(1 "No"
-         2 "Yes"
+OPTIONS=(1 "Yes"
+         2 "No"
          3 "Exit"
          4 "testing...")
 
@@ -86,7 +87,7 @@ CHOICE=$(dialog --clear \
 
 clear
     case $CHOICE in
-        1) # - No
+        1) # - Yes
             echo "Lets Go!"
             echo "start installer" # - start the normal installer
             sudo apt update
@@ -156,26 +157,12 @@ $cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
             echo "DB Admin Passwort: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
             echo "DB Admin Passwort 2: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
             ;;
-        2) # - Yes
-            HEIGHT=15
-            WIDTH=70
-            CHOICE_HEIGHT=5
-            BACKTITLE="(L)inux(A)apache(M)ysql(P)HP Installer - $VERSION"
-            TITLE="Then please reinstall the server or uninstall the existing LAMP"
-            MENU="Choose one of the following options:"
-
-            OPTIONS=(1 "okey")
-            dialog --clear \
-                   --backtitle "$BACKTITLE" \
-                   --title "$TITLE" \
-                   --menu "$MENU" \
-                   $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                   "${OPTIONS[@]}" \
-                   2>&1 >/dev/tty
+        2) # - No
+            echo "exit Installer!" 
             ;;
         3) # - Exit/Quit
             clear
-            echo "exit Installer"
+            echo "exit Installer!"
             ;;
         *) # - Error
             echo "Error! Please report this bug on Github"
