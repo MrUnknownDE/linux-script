@@ -22,12 +22,12 @@ echo "#                                              #"
 echo "#                                              #"
 echo "################################################"
 echo ""
-echo "It will now install the following packages: dialog, expect, sharutils, Debian-Repos"
+echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, Debian-Repos"
 sleep 2
 echo "Install Debian-Repos"
 bash <(wget -O - 'https://git.io/JYN1M') > /dev/null
 echo "ok."
-sudo apt update && apt install dialog expect sharutils -y
+sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 -y
 GEN_PASS=$(
 for ((n=0;n<1;n++))
 do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
@@ -66,6 +66,9 @@ send \"y\r\"
 expect eof
 ")
 serviceIP=$(ip route get 8.8.8.8 | sed -n '/src/{s/.*src *\([^ ]*\).*/\1/p;q}')
+row1=$(grep -n GEN_PASS  /var/www/html/phpmyadmin/config.inc.php | sed 's/:.*//')
+row0=$(($GEN_PASS))
+
 
 HEIGHT=15
 WIDTH=70
@@ -109,16 +112,14 @@ clear
             sudo tar xvf ~/Downloads/phpMyAdmin-latest-all-languages.tar.gz --strip-components=1 -C /var/www/html/phpmyadmin
             sudo chown -R 33:33 /var/www/html/phpmyadmin
             wget https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/phpmyadmin-config.inc.php > /var/www/html/phpmyadmin/config.inc.php
-            row1=$(grep -n GEN_PASS  /var/www/html/phpmyadmin/config.inc.php | sed 's/:.*//')
-            row0=$(($GEN_PASS))
             sed "${row0},${row1}d" /var/www/html/phpmyadmin/config.inc.php
             sudo chmod 660 /var/www/html/phpmyadmin/config.inc.php
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             rm -r /var/www/html/*
-            wget -p /var/www/html/index.html https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.html
-            clear
+            curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.html > /var/www/html/index.html
+            #clear
             echo "Do you want to have a domain certified by Let's Encrypt? (yes/no)"
             read answer
             if ["answer"="yes"]; then
