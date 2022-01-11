@@ -7,7 +7,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 clear
 echo "################################################"
-echo "# Version: 0.1v                                #"
+echo "# Version: 1.0v                                #"
 echo "#                                              #"
 echo "#                Python3.9.2                   #"
 echo "#                Quick Build                   #"
@@ -33,9 +33,9 @@ echo "LETS GO!"
 sudo apt update
 sudo apt -y upgrade
 sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev -y
-wget https://www.python.org/ftp/python/3.9.2/Python-3.9.2.tgz
-tar -xf Python-3.9.2.tgz
-cd Python-3.9.2
+wget https://www.python.org/ftp/python/3.9.2/Python-3.9.9.tgz
+tar -xf Python-3.9.9.tgz
+cd Python-3.9.9
 ./configure --enable-optimizations
 make -j $CPUCORES
 sudo make altinstall

@@ -94,7 +94,7 @@ clear
             echo "start installer" # - start the normal installer
             sudo apt update
             sudo apt upgrade -y
-            sudo apt install wget apache2 apache2-utils mariadb-server mariadb-client lsb-release ca-certificates apt-transport-https software-properties-common-y 
+            sudo apt install wget apache2 apache2-utils mariadb-server mariadb-client lsb-release ca-certificates apt-transport-https software-properties-common -y 
             echo "$SECURE_MYSQL"
             echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
             wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
@@ -108,25 +108,16 @@ clear
             mkdir /var/www/html/phpmyadmin
             sudo tar xvf ~/Downloads/phpMyAdmin-latest-all-languages.tar.gz --strip-components=1 -C /var/www/html/phpmyadmin
             sudo chown -R 33:33 /var/www/html/phpmyadmin
-            echo "
-<?php
-declare(strict_types=1);
-$cfg['blowfish_secret'] = '$GEN_PASS'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
-$i = 0;
-$i++;
-$cfg['Servers'][$i]['auth_type'] = 'cookie';
-$cfg['Servers'][$i]['host'] = 'localhost';
-$cfg['Servers'][$i]['compress'] = false;
-$cfg['Servers'][$i]['AllowNoPassword'] = false;
-
-$cfg['UploadDir'] = '';
-$cfg['SaveDir'] = '';" > /var/www/html/phpmyadmin/config.inc.php
+            wget https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/phpmyadmin-config.inc.php > /var/www/html/phpmyadmin/config.inc.php
+            row1=$(grep -n GEN_PASS  /var/www/html/phpmyadmin/config.inc.php | sed 's/:.*//')
+            row0=$(($GEN_PASS))
+            sed "${row0},${row1}d" /var/www/html/phpmyadmin/config.inc.php
             sudo chmod 660 /var/www/html/phpmyadmin/config.inc.php
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             rm -r /var/www/html/*
-            wget -p /var/www/html/index.html https://static.syslul.de/src/johannes/
+            wget -p /var/www/html/index.html https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.html
             clear
             echo "Do you want to have a domain certified by Let's Encrypt? (yes/no)"
             read answer

@@ -31,6 +31,13 @@ echo ""
 echo "LETS GO!"
 
 case "$SYSTEM" in 
+    "Debian GNU/Linux 11 \n \l")
+        apt-get update
+        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/source.list
+        apt-get update && apt-get upgrade -y
+        echo "Have Fun with the Official Repos :)"
+        ;;
     "Debian GNU/Linux 10 \n \l")
         apt-get update
         apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
@@ -42,13 +49,6 @@ case "$SYSTEM" in
         apt-get update 
         apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
         curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-9.txt" -o /etc/apt/source.list
-        apt-get update && apt-get upgrade -y
-        echo "Have Fun with the Official Repos :)"
-        ;;
-    "Debian GNU/Linux 11 \n \l")
-        apt-get update
-        apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
-        curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/source.list
         apt-get update && apt-get upgrade -y
         echo "Have Fun with the Official Repos :)"
         ;;
