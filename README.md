@@ -6,10 +6,10 @@ Paar wunderbare Scripts
 
 ## Spigot Auto-Build Scripts
 Systemrequirements:<br>
-Distribution: Debian 9-10 / Ubuntu 16.04 - 18.04<br>
+Distribution: Debian 9-11 / Ubuntu 16.04 - 20.04<br>
 CPU: 1 vCore <br>
 Ram: 2GB <br><br>
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+![](https://img.shields.io/badge/Debian%2011-work!-green) ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://git.io/JYBMI')</code>
 
 
@@ -17,7 +17,7 @@ Ram: 2GB <br><br>
 
 
 ## TS3AudioBot Installer
-![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
+![](https://img.shields.io/badge/Debian%2011-work!-green) ![](https://img.shields.io/badge/Debian%2010-work!-green) ![](https://img.shields.io/badge/Debian%209-work!-green) ![](https://img.shields.io/badge/Ubuntu%2020.04-work!-green) ![](https://img.shields.io/badge/Ubuntu%2018.04-work!-green)<br>
 <code>bash <(wget -O - 'https://git.io/JYBMG')</code>
 
 

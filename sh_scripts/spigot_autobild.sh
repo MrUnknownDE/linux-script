@@ -23,14 +23,35 @@ echo ""
 echo ""
 echo ""
 echo ""
-
-rm BuildTools.jar
-wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
 clear
 
-echo "Checking software packages ..."
-apt-get update
-apt-get install git default-jdk -y
-echo "start building ..."
-sleep 2
-java -jar BuildTools.jar
+FILE=BuildTool.jar
+if [ -f "$FILE" ]; then # Datei ist nicht vorhanden
+    echo "Checking software packages ..."
+    apt-get update
+    apt-get install git default-jdk openjdk-17-jdk openjdk-17-jre -y
+    clear
+    echo "Checking software packages ..."
+    echo -n "Which version should be built? (z.B. 1.18): "
+    read;
+    echo "start building Spigot-${REPLY} ..."
+    sleep 2
+    java -jar BuildTools.jar --rev ${REPLY}
+else # Datei ist nicht vorhanden
+    echo "downloading BuildTools ..."
+    rm BuildTools.jar
+    wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+    clear
+    echo "downloading BuildTools ..."
+    echo "Checking software packages ..."
+    apt-get update
+    apt-get install git default-jdk openjdk-17-jdk openjdk-17-jre -y
+    clear
+    echo "downloading BuildTools ..."
+    echo "Checking software packages ..."
+    echo -n "Which version should be built? (z.B. 1.18): "
+    read;
+    echo "start building Spigot-${REPLY} ..."
+    sleep 2
+    java -jar BuildTools.jar --rev ${REPLY}
+fi
