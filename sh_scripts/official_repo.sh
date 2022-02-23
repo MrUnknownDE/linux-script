@@ -1,5 +1,5 @@
 #!/bin/bash
-SYSTEM=$(cat /etc/*-release | grep "VERSION_ID=")
+SYSTEM=$(lsb_release -sr)
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
@@ -30,45 +30,39 @@ echo ""
 echo ""
 echo "LETS GO!"
 
-if [ $SYSTEM = 11 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+if [ "$SYSTEM" == "11" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
     echo "Have Fun with the Official Repos :)"
 fi
-if [ $SYSTEM = 10 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+if [ "$SYSTEM" == "10" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-10.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
     echo "Have Fun with the Official Repos :)"
 fi
-if [ $SYSTEM = 9 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+if [ "$SYSTEM" == "9" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-9.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
     echo "Have Fun with the Official Repos :)"
 fi
-if [ $SYSTEM =  Ubuntu 18.04 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
-    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-18.04.txt" -o /etc/apt/sources.list
-    apt-get update && apt-get upgrade -y
-    echo "Have Fun with the Official Repos :)"
-fi
-if [ $SYSTEM =  Ubuntu 16.04 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
-    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-16.04.txt" -o /etc/apt/sources.list
-    apt-get update && apt-get upgrade -y
-    echo "Have Fun with the Official Repos :)"
-fi
-if [ $SYSTEM =  Ubuntu 20.04 ]; then
-    apt-get update
-    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+if [ "$SYSTEM" == "20.04" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-20.04.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+    echo "Have Fun with the Official Repos :)"
+fi
+if [ "$SYSTEM" == "18.04" ]; then
+    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-18.04.txt" -o /etc/apt/sources.list
+    apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+    echo "Have Fun with the Official Repos :)"
+fi
+if [ "$SYSTEM" ==  "16.04" ]; then
+    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-16.04.txt" -o /etc/apt/sources.list
+    apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
     echo "Have Fun with the Official Repos :)"
 fi
