@@ -5,9 +5,11 @@ if [ "$(id -u)" != "0" ]; then
    echo "This script must be run as root" 1>&2
    exit 1
 fi
+VERSION="Version: 1.0v"
 clear
+echo "$VERSION"
 echo "################################################"
-echo "# Version: 0.1v                                #"
+echo "#                                              #"
 echo "#                                              #"
 echo "#                 Speedtest                    #"
 echo "#                 Installer                    #"
@@ -32,36 +34,19 @@ echo "LETS GO!"
 
 case "$SYSTEM" in
     "Debian")
-        sudo apt install gnupg1 apt-transport-https dirmngr -y
-        export INSTALL_KEY=379CE192D401AB61
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
-        echo "deb https://ookla.bintray.com/debian generic main" | sudo tee  /etc/apt/sources.list.d/speedtest.list
-        sudo apt update
-        # Other non-official binaries will conflict with Speedtest CLI
-        # Example how to remove using apt-get
-        sudo apt remove speedtest-cli -y
-        sudo apt install speedtest -y
+        sudo apt-get install curl
+        curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash
+        sudo apt-get install speedtest-cli
         echo "speedtest installer has end ..."
         ;;
     "Ubuntu")
-        sudo apt install gnupg1 apt-transport-https dirmngr -y
-        export INSTALL_KEY=379CE192D401AB61
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
-        echo "deb https://ookla.bintray.com/debian generic main" | sudo tee  /etc/apt/sources.list.d/speedtest.list
-        sudo apt update
-        # Other non-official binaries will conflict with Speedtest CLI
-        # Example how to remove using apt-get
-        sudo apt remove speedtest-cli -y
-        sudo apt install speedtest -y
+        sudo apt-get install curl
+        curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash
+        sudo apt-get install speedtest-cli
         echo "speedtest installer has end ..."
         ;;
     "Kernel \r on an \m")
-        sudo yum install wget
-        wget https://bintray.com/ookla/rhel/rpm -O bintray-ookla-rhel.repo
-        sudo mv bintray-ookla-rhel.repo /etc/yum.repos.d/
-        # Other non-official binaries will conflict with Speedtest CLI
-        # Example how to remove using yum
-        # rpm -qa | grep speedtest | xargs -I {} sudo yum -y remove {}
+        curl -s https://install.speedtest.net/app/cli/install.rpm.sh | sudo bash
         sudo yum install speedtest
         ;;
     *)
