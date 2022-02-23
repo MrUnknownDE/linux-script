@@ -22,12 +22,9 @@ echo "#                                              #"
 echo "#                                              #"
 echo "################################################"
 echo ""
-echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, official_repo, unzip"
+echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, unzip, wget, curl"
 sleep 2
-echo "Install Debian-Repos"
-bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/official_repo_quick.sh') > /dev/null
-echo "ok."
-sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 unzip zip -y
+sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 unzip zip wget curl -y
 GEN_PASS=$(
 for ((n=0;n<1;n++))
 do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
@@ -66,8 +63,6 @@ send \"y\r\"
 expect eof
 ")
 serviceIP=$(ip route get 8.8.8.8 | sed -n '/src/{s/.*src *\([^ ]*\).*/\1/p;q}')
-row1=$(grep -n GEN_PASS  /var/www/html/phpmyadmin/config.inc.php | sed 's/:.*//')
-row0=$(($GEN_PASS))
 
 
 HEIGHT=15
@@ -109,14 +104,13 @@ clear
             unzip phpMyAdmin-5.1.3-all-languages.zip
             mv phpMyAdmin-5.1.3-all-languages/* /var/www/html/phpmyadmin
             curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/phpmyadmin-config.inc.php --output /var/www/html/phpmyadmin/config.inc.php   
-            sed "${row0},${row1}d" /var/www/html/phpmyadmin/config.inc.php
             sudo chmod 660 /var/www/html/phpmyadmin/config.inc.php
             sudo chown -R 33:33 /var/www/html/phpmyadmin
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.html > /var/www/html/index.html
-            #clear
+            clear
             echo "Do you want to have a domain certified by Let's Encrypt? (yes/no)" && read answer;
             if [ $answer == "yes" ]; then
                 apt install certbot python3-certbot-apache -y
@@ -127,22 +121,39 @@ clear
                 echo "40 3 * * 0 letsencrypt renew >> /var/log/letsencrypt-renew.log && /etc/init.d/apache2 restart" > letsencrypt.cron
                 crontab letsencrypt.cron
                 rm letsencrypt.cron
-            fi
-            echo "
-            Thank you for using this Script
-            Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
-            
-            MySQL-Login (localhost)
-            user: root
-            password: $MYSQL_ROOT_PASSWORD (Please change this password! It is static )
+                clear
+                echo "
+                Thank you for using this Script
+                Your Webserver is available on http://${domain}/ and http://${domain}/phpmyadmin
+                
+                MySQL-Login (localhost)
+                user: root
+                password: $MYSQL_ROOT_PASSWORD (Please change this password! It is static )
 
-            phpMyAdmin-Login
-            user: mysqladmin
-            password: $MYSQL_MYSQLADMIN_PASSWORD (Please change this password! It is static)
-            
-            You want to improve my script or have a wish then open an issues on Github :)
-            >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
-            cat installer-log.txt 
+                phpMyAdmin-Login
+                user: mysqladmin
+                password: $MYSQL_MYSQLADMIN_PASSWORD (Please change this password! It is static)
+                
+                You want to improve my script or have a wish then open an issues on Github :)
+                >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
+                cat installer-log.txt
+            else
+                echo "
+                Thank you for using this Script
+                Your Webserver is available on http://$serviceIP/ and http://$serviceIP/phpmyadmin
+                
+                MySQL-Login (localhost)
+                user: root
+                password: $MYSQL_ROOT_PASSWORD (Please change this password! It is static )
+
+                phpMyAdmin-Login
+                user: mysqladmin
+                password: $MYSQL_MYSQLADMIN_PASSWORD (Please change this password! It is static)
+                
+                You want to improve my script or have a wish then open an issues on Github :)
+                >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
+                cat installer-log.txt 
+            fi
             ;;
         4)
             echo "DB Root Passwort: $MYSQL_ROOT_PASSWORD"
