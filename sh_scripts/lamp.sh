@@ -25,7 +25,7 @@ echo ""
 echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, official_repo, unzip"
 sleep 2
 echo "Install Debian-Repos"
-bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/sh/official_repo.sh') > /dev/null
+bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/official_repo.sh') > /dev/null
 echo "ok."
 sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 unzip zip -y
 GEN_PASS=$(
