@@ -22,9 +22,6 @@ echo "#                                              #"
 echo "#                                              #"
 echo "################################################"
 echo ""
-echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, unzip, wget, curl"
-sleep 2
-sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 unzip zip wget curl -y
 GEN_PASS=$(
 for ((n=0;n<1;n++))
 do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
@@ -74,8 +71,7 @@ MENU="Choose one of the following options:"
 
 OPTIONS=(1 "Yes"
          2 "No"
-         3 "Exit"
-         4 "testing...")
+         3 "Exit")
 
 CHOICE=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
@@ -90,14 +86,14 @@ clear
         1) # - Yes
             echo "Lets Go!"
             echo "start installer" # - start the normal installer
-            sudo apt update
-            sudo apt upgrade -y
-            sudo apt install wget apache2 apache2-utils mariadb-server mariadb-client lsb-release ca-certificates apt-transport-https software-properties-common -y 
-            echo "$SECURE_MYSQL"
+            apt update && apt install expect sharutils gnupg gnupg2 gnupg1 unzip zip wget curl -y
             echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
             wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -
+            sudo apt update
+            sudo apt upgrade -y
+            sudo apt install wget apache2 apache2-utils mariadb-server mariadb-client lsb-release ca-certificates apt-transport-https software-properties-common php php-cgi php-mysql php-pear php-mbstring libapache2-mod-php php-common php-phpseclib php-mysql php8.0-bcmath php8.0-curl-dbgsym php8.0-gmp-dbgsym php8.0-mysql php8.0-pspell-dbgsym php8.0-tidy php8.0-bcmath-dbgsym php8.0-dba php8.0-imap php8.0-mysql-dbgsym php8.0-readline php8.0-tidy-dbgsym php8.0-bz2 php8.0-dba-dbgsym php8.0-imap-dbgsym php8.0-odbc php8.0-readline-dbgsym php8.0-xdebug php8.0-bz2-dbgsym php8.0-dev php8.0-interbase php8.0-odbc-dbgsym php8.0-snmp php8.0-xml php8.0-cgi php8.0-enchant php8.0-interbase-dbgsym  php8.0-opcache php8.0-snmp-dbgsym php8.0-xml-dbgsym php8.0-cgi-dbgsym php8.0-enchant-dbgsym php8.0-intl php8.0-opcache-dbgsym php8.0-soap php8.0-xsl php8.0-cli php8.0-fpm php8.0-intl-dbgsym php8.0-pgsql php8.0-soap-dbgsym php8.0-zip php8.0-cli-dbgsym php8.0-fpm-dbgsym php8.0-ldap php8.0-pgsql-dbgsym php8.0-sqlite3 php8.0-zip-dbgsym php8.0-common php8.0-gd php8.0-ldap-dbgsym php8.0-phpdbg php8.0-sqlite3-dbgsym php8.0-common-dbgsym php8.0-gd-dbgsym php8.0-mbstring php8.0-phpdbg-dbgsym php8.0-sybase php8.0-curl php8.0-gmp php8.0-mbstring-dbgsym php8.0-pspell php8.0-sybase-dbgsym -y 
+            echo "$SECURE_MYSQL"
             apt update
-            sudo apt install php php-cgi php-mysql php-pear php-mbstring php-gettext libapache2-mod-php php-common php-phpseclib php-mysql php8.0-bcmath php8.0-curl-dbgsym php8.0-gmp-dbgsym php8.0-mysql php8.0-pspell-dbgsym php8.0-tidy php8.0-bcmath-dbgsym php8.0-dba php8.0-imap php8.0-mysql-dbgsym php8.0-readline php8.0-tidy-dbgsym php8.0-bz2 php8.0-dba-dbgsym php8.0-imap-dbgsym php8.0-odbc php8.0-readline-dbgsym php8.0-xdebug php8.0-bz2-dbgsym php8.0-dev php8.0-interbase php8.0-odbc-dbgsym php8.0-snmp php8.0-xml php8.0-cgi php8.0-enchant php8.0-interbase-dbgsym  php8.0-opcache php8.0-snmp-dbgsym php8.0-xml-dbgsym php8.0-cgi-dbgsym php8.0-enchant-dbgsym php8.0-intl php8.0-opcache-dbgsym php8.0-soap php8.0-xsl php8.0-cli php8.0-fpm php8.0-intl-dbgsym php8.0-pgsql php8.0-soap-dbgsym php8.0-zip php8.0-cli-dbgsym php8.0-fpm-dbgsym php8.0-ldap php8.0-pgsql-dbgsym php8.0-sqlite3 php8.0-zip-dbgsym php8.0-common php8.0-gd php8.0-ldap-dbgsym php8.0-phpdbg php8.0-sqlite3-dbgsym php8.0-common-dbgsym php8.0-gd-dbgsym php8.0-mbstring php8.0-phpdbg-dbgsym php8.0-sybase php8.0-curl php8.0-gmp php8.0-mbstring-dbgsym php8.0-pspell php8.0-sybase-dbgsym -y
             rm -r /var/www/html/*
             wget https://files.phpmyadmin.net/phpMyAdmin/5.1.3/phpMyAdmin-5.1.3-all-languages.zip
             mkdir /var/www/html/phpmyadmin
@@ -110,6 +106,7 @@ clear
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.html > /var/www/html/index.html
+            curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/lamp.php > /var/www/html/lamp.php
             clear
             echo "Do you want to have a domain certified by Let's Encrypt? (yes/no)" && read answer;
             if [ $answer == "yes" ]; then
@@ -154,13 +151,6 @@ clear
                 >> https://github.com/MrUnknownDE/linux-script/issues/new" > installer-log.txt
                 cat installer-log.txt 
             fi
-            ;;
-        4)
-            echo "DB Root Passwort: $MYSQL_ROOT_PASSWORD"
-            echo "DB Root GEN PASSWORT:$MYSQL_ROOT_GEN_PASSWORD"
-            echo "DB Root GEN PASSWORT 2:$MYSQL_ROOT_GEN_PASSWORD"
-            echo "DB Admin Passwort: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
-            echo "DB Admin Passwort 2: $MYSQL_MYSQLADMIN_GEN_PASSWORD"
             ;;
         2) # - No
             echo "exit Installer!" 
