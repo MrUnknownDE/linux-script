@@ -25,7 +25,7 @@ echo ""
 echo "It will now install the following packages: dialog, expect, sharutils,gnupg1 & 2, official_repo, unzip"
 sleep 2
 echo "Install Debian-Repos"
-bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/official_repo.sh') > /dev/null
+bash <(wget -O - 'https://raw.githubusercontent.com/MrUnknownDE/linux-script/official_repo_quick.sh') > /dev/null
 echo "ok."
 sudo apt update && apt install dialog expect sharutils gnupg gnupg2 gnupg1 unzip zip -y
 GEN_PASS=$(
@@ -108,11 +108,10 @@ clear
             mkdir /var/www/html/phpmyadmin
             unzip phpMyAdmin-5.1.3-all-languages.zip
             mv phpMyAdmin-5.1.3-all-languages/* /var/www/html/phpmyadmin
-            sudo chown -R 33:33 /var/www/html/phpmyadmin
-            rm /var/www/html/phpmyadmin/config.inc.php
-            wget https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/phpmyadmin-config.inc.php > /var/www/html/phpmyadmin/config.inc.php
+            curl https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/res/phpmyadmin-config.inc.php --output /var/www/html/phpmyadmin/config.inc.php   
             sed "${row0},${row1}d" /var/www/html/phpmyadmin/config.inc.php
             sudo chmod 660 /var/www/html/phpmyadmin/config.inc.php
+            sudo chown -R 33:33 /var/www/html/phpmyadmin
             sudo systemctl restart apache2
             echo "CREATE USER 'mysqladmin'@'localhost' IDENTIFIED BY '$MYSQL_MYSQLADMIN_PASSWORD'; GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost'; FLUSH PRIVILEGES;"  | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
             echo "GRANT ALL PRIVILEGES ON *.* TO 'mysqladmin'@'localhost';" | mysql -u root -password="$MYSQL_ROOT_PASSWORD"
