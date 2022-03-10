@@ -38,23 +38,23 @@ clear
     case $CHOICE in
         1) 
             echo "Launching LAMP Installer"
-            bash <(curl -s https://raw.githubusercontent.com/mrunknownde/Linux-Script/master/sh_scripts/lamp.sh)
+            bash <(curl -s https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/lamp.sh)
             ;;
         2) 
             echo "Launching Python 3 Installer"
-            bash <(curl -s https://raw.githubusercontent.com/mrunknownde/Linux-Script/master/sh_scripts/python-quick-build.sh)
+            bash <(curl -s https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/python-quick-build.sh)
             ;;
         3)
             echo "Launching Spigot Builder"
-            bash <(curl -s https://raw.githubusercontent.com/mrunknownde/Linux-Script/master/sh_scripts/spigot-builder.sh)
+            bash <(curl -s https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/spigot-builder.sh)
             ;;
         4)
             echo "Launching Ts3AudioBot Installer"
-            bash <(curl -s https://raw.githubusercontent.com/mrunknownde/Linux-Script/master/sh_scripts/ts3audiobot.sh)
+            bash <(curl -s https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/ts3audiobot.sh)
             ;;
         5)
             echo "Launching Geekbench 5 Installer"
-            bash <(curl -s https://raw.githubusercontent.com/mrunknownde/Linux-Script/master/sh_scripts/geekbench.sh)
+            bash <(curl -s https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/geekbench.sh)
             ;;
         6)
             echo "Exiting"
