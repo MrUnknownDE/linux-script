@@ -30,6 +30,12 @@ echo ""
 echo ""
 echo "LETS GO!"
 
+if [ "$SYSTEM" == "12" ]; then
+    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-12.txt" -o /etc/apt/sources.list
+    apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+    echo "Have Fun with the Official Repos :)"
+fi
 if [ "$SYSTEM" == "11" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/debian-11.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
