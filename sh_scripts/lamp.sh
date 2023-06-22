@@ -22,18 +22,9 @@ echo "#                                              #"
 echo "#                                              #"
 echo "################################################"
 echo ""
-GEN_PASS=$(
-for ((n=0;n<1;n++))
-do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
-done)
-GEN_PASS2=$(
-for ((n=0;n<1;n++))
-do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
-done)
-GEN_PASS3=$(
-for ((n=0;n<1;n++))
-do dd if=/dev/urandom count=1 2> /dev/null | uuencode -m - | sed -ne 2p | cut -c-32
-done)
+GEN_PASS=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n 1)
+GEN_PASS2=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n 1)
+GEN_PASS3=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w32 | head -n 1)
 MYSQL_MYSQLADMIN_PASSWORD=$GEN_PASS
 MYSQL_ROOT_PASSWORD=$GEN_PASS2
 PHPMYADMIN_PASSPHRASE="$GEN_PASS3"
