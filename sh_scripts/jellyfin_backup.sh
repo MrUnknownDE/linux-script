@@ -21,8 +21,8 @@ fi
 cd "$ziel_verzeichnis" || exit
 
 # Ausgabe- und Fehler-Log-Dateien für das Zip-Kommando
-zip_output_log="zip_output.log"
-zip_error_log="zip_error.log"
+zip_output_log="/root/zip_output.log"
+zip_error_log="/root/zip_error.log"
 
 # Führe das Backup durch und zeige einen Fortschrittsbalken an
 zip -r "$backup_datei" "$quelle_verzeichnis" > "$zip_output_log" 2> "$zip_error_log" &
@@ -37,6 +37,8 @@ while kill -0 $pid >/dev/null 2>&1; do
     sleep 0.5
     echo -n -e "\r"
     echo -n -e "Backup läuft: ..."
+    sleep 0.5
+    echo -n -e "\r"
 done
 
 # Überprüfe den Status des Backups
