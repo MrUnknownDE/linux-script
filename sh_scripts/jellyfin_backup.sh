@@ -20,14 +20,30 @@ fi
 # Wechsel zum Zielverzeichnis
 cd "$ziel_verzeichnis" || exit
 
-# Führe das Backup durch
-zip -r "$backup_datei" "$quelle_verzeichnis"
+# Ausgabe- und Fehler-Log-Dateien für das Zip-Kommando
+zip_output_log="zip_output.log"
+zip_error_log="zip_error.log"
+
+# Führe das Backup durch und zeige einen Fortschrittsbalken an
+zip -r "$backup_datei" "$quelle_verzeichnis" > "$zip_output_log" 2> "$zip_error_log" &
+pid=$! # PID des Hintergrundprozesses erhalten
+
+# Zeige den Fortschrittsbalken an, solange das ZIP-Kommando läuft
+while kill -0 $pid >/dev/null 2>&1; do
+    echo -n -e "Backup läuft: ."
+    sleep 0.5
+    echo -n -e "\r"
+    echo -n -e "Backup läuft: .."
+    sleep 0.5
+    echo -n -e "\r"
+    echo -n -e "Backup läuft: ..."
+done
 
 # Überprüfe den Status des Backups
 if [ $? -eq 0 ]; then
     echo "Backup erfolgreich erstellt: $ziel_verzeichnis/$backup_datei"
 else
-    echo "Fehler beim Erstellen des Backups."
+    echo "Fehler beim Erstellen des Backups. Siehe $ziel_verzeichnis/$zip_error_log für Details."
 fi
 
 # Lösche alte Backups
