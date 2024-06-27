@@ -27,8 +27,6 @@ if [ "$1" == "telegram-test" ]; then
     exit 0
 fi
 
-
-
 # Vorhandene backup.log-Datei löschen
 log_datei="backup.log"
 if [ -f "$log_datei" ]; then
