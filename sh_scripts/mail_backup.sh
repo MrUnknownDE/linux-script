@@ -19,6 +19,16 @@ send_telegram_message() {
     curl -s -X POST "https://api.telegram.org/bot$telegram_bot_token/sendMessage" -d chat_id="$telegram_chat_id" -d text="$message"
 }
 
+# Überprüfung, ob das Script mit dem Argument "telegram-test" aufgerufen wurde
+if [ "$1" == "telegram-test" ]; then
+    echo "Send Textnachricht an Telegram..." 
+    send_telegram_message "Test-Nachricht%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: Script-Debbuging"
+    echo "Testnachricht wurde versendet..."
+    exit 0
+fi
+
+
+
 # Vorhandene backup.log-Datei löschen
 log_datei="backup.log"
 if [ -f "$log_datei" ]; then
@@ -32,12 +42,12 @@ MAILCOW_BACKUP_LOCATION=/opt/Backups /opt/mailcow-dockerized/helper-scripts/back
 
 # Überprüfen, ob das Mailcow Backup erfolgreich war
 if [ $? -eq 0 ]; then
-    send_telegram_message "Erfolg!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: Mailcow-Backup"
+    send_telegram_message "Erfolg!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: Mailcow-Backup"
     echo "Mailcow Backup erfolgreich."
 else
     echo "Fehler beim Mailcow Backup."
     error_message=$(tail -n 20 backup.log)
-    send_telegram_message "Fehlgeschlagen!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: Mailcow-Backup\nError: $error_message"
+    send_telegram_message "Fehlgeschlagen!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: Mailcow-Backup%0AError: $error_message"
     echo "Fehler beim Mailcow Backup. Logs wurden gesendet."
     exit 1
 fi
@@ -53,13 +63,13 @@ if [ $? -eq 0 ]; then
     # E-Mail-Benachrichtigung über SMTP senden
     echo "Backup erfolgreich auf S3 hochgeladen." 
     # Telegram-Benachrichtigung senden
-    send_telegram_message "Erfolg!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: S3-Mailcow-Backup-Upload"
+    send_telegram_message "Erfolg!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: S3-Mailcow-Backup-Upload"
 else
     echo "Fehler beim Hochladen des Backups auf S3."
     # E-Mail-Benachrichtigung über SMTP senden
     echo "Backup-Prozess auf mail.johanneskr.de fehlgeschlagen."
     # Telegram-Benachrichtigung senden
-    send_telegram_message "Fehlgeschlagen!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: S3-Mailcow-Backup-Upload"
+    send_telegram_message "Fehlgeschlagen!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: S3-Mailcow-Backup-Upload"
 fi
 
 echo "Backup-Prozess abgeschlossen."
