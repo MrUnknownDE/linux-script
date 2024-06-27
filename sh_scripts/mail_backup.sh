@@ -10,11 +10,21 @@ rclone_konfig="remote"
 telegram_bot_token="YOUR_TELEGRAM_BOT_TOKEN"
 telegram_chat_id="YOUR_CHAT_ID"
 
+#Time
+timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+
 # Funktion, um eine Nachricht an Telegram zu senden
 send_telegram_message() {
     local message=$1
     curl -s -X POST "https://api.telegram.org/bot$telegram_bot_token/sendMessage" -d chat_id="$telegram_chat_id" -d text="$message"
 }
+
+# Vorhandene backup.log-Datei löschen
+log_datei="backup.log"
+if [ -f "$log_datei" ]; then
+    echo "Lösche vorhandene backup.log-Datei..."
+    rm "$log_datei"
+fi
 
 # Mailcow Backup durchführen
 echo "Starte Mailcow Backup..."
@@ -22,12 +32,13 @@ MAILCOW_BACKUP_LOCATION=/opt/Backups /opt/mailcow-dockerized/helper-scripts/back
 
 # Überprüfen, ob das Mailcow Backup erfolgreich war
 if [ $? -eq 0 ]; then
+    send_telegram_message "Erfolg!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: Mailcow-Backup"
     echo "Mailcow Backup erfolgreich."
 else
     echo "Fehler beim Mailcow Backup."
     error_message=$(tail -n 20 backup.log)
-    send_telegram_message "Fehler beim Mailcow Backup:\n$error_message"
-    echo "Fehler beim Mailcow Backup. Logs wurden gesendet." | mailx -s "FEHLER - Mail-Backup" -S smtp="smtp://mail.johanneskr.de:465" -S smtp-auth=login -S smtp-auth-user="dein_username" -S smtp-auth-password="dein_passwort" -S from="Backup Script <backup@mail.johanneskr.de>" deine_email@domain.de
+    send_telegram_message "Fehlgeschlagen!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: Mailcow-Backup\nError: $error_message"
+    echo "Fehler beim Mailcow Backup. Logs wurden gesendet."
     exit 1
 fi
 
@@ -40,15 +51,15 @@ rclone copy "$quelle_verzeichnis" "$rclone_konfig":"$ziel_verzeichnis"
 if [ $? -eq 0 ]; then
     echo "Backup erfolgreich auf S3 hochgeladen."
     # E-Mail-Benachrichtigung über SMTP senden
-    echo "Backup erfolgreich auf S3 hochgeladen." | mailx -s "ERFOLG - Mail-Backup" -S smtp="smtp://mail.johanneskr.de:465" -S smtp-auth=login -S smtp-auth-user="dein_username" -S smtp-auth-password="dein_passwort" -S from="Backup Script <backup@mail.johanneskr.de>" deine_email@domain.de
+    echo "Backup erfolgreich auf S3 hochgeladen." 
     # Telegram-Benachrichtigung senden
-    send_telegram_message "[mail.johanneskr.de] Backup erfolgreich auf S3 hochgeladen."
+    send_telegram_message "Erfolg!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: S3-Mailcow-Backup-Upload"
 else
     echo "Fehler beim Hochladen des Backups auf S3."
     # E-Mail-Benachrichtigung über SMTP senden
-    echo "Backup-Prozess auf mail.johanneskr.de fehlgeschlagen." | mailx -s "FEHLER - Mail-Backup" -S smtp="smtp://mail.johanneskr.de:465" -S smtp-auth=login -S smtp-auth-user="dein_username" -S smtp-auth-password="dein_passwort" -S from="Backup Script <backup@mail.johanneskr.de>" deine_email@domain.de
+    echo "Backup-Prozess auf mail.johanneskr.de fehlgeschlagen."
     # Telegram-Benachrichtigung senden
-    send_telegram_message "[mail.johanneskr.de] Fehler beim Hochladen des Backups auf S3."
+    send_telegram_message "Fehlgeschlagen!\nServer: mail.johanneskr.de\n Time: $timestamp\n Application: S3-Mailcow-Backup-Upload"
 fi
 
 echo "Backup-Prozess abgeschlossen."
