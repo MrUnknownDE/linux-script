@@ -54,6 +54,18 @@ if [ "$OLD" == "9" ]; then
     apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
     echo "Have Fun with the Official Repos :)"
 fi
+if [ "$SYSTEM" == "24" ]; then
+    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-24.04.txt" -o /etc/apt/sources.list
+    apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+    echo "Have Fun with the Official Repos :)"
+fi
+if [ "$SYSTEM" == "22" ]; then
+    curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-22.04.txt" -o /etc/apt/sources.list
+    apt-get update && apt-get upgrade -y
+    apt-get install curl wget apt-transport-https dirmngr neofetch htop nload git -y
+    echo "Have Fun with the Official Repos :)"
+fi
 if [ "$SYSTEM" == "20" ]; then
     curl "https://raw.githubusercontent.com/MrUnknownDE/linux-script/main/sh_scripts/repos/ubuntu-20.04.txt" -o /etc/apt/sources.list
     apt-get update && apt-get upgrade -y
