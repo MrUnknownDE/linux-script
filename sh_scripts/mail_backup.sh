@@ -47,7 +47,7 @@ else
     error_message=$(tail -n 20 backup.log)
     send_telegram_message "Fehlgeschlagen!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: Mailcow-Backup%0AError: $error_message"
     echo "Fehler beim Mailcow Backup. Logs wurden gesendet."
-    exit 1
+    exit 0
 fi
 
 # Rclone-Befehl zum Kopieren des Verzeichnisses
@@ -68,6 +68,7 @@ else
     echo "Backup-Prozess auf mail.johanneskr.de fehlgeschlagen."
     # Telegram-Benachrichtigung senden
     send_telegram_message "Fehlgeschlagen!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: S3-Mailcow-Backup-Upload"
+    exit 0
 fi
 
 echo "Backup-Prozess abgeschlossen."
