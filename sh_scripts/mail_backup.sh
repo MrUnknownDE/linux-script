@@ -58,14 +58,10 @@ rclone copy "$quelle_verzeichnis" "$rclone_konfig":"$ziel_verzeichnis"
 # Überprüfen, ob der Upload erfolgreich war
 if [ $? -eq 0 ]; then
     echo "Backup erfolgreich auf S3 hochgeladen."
-    # E-Mail-Benachrichtigung über SMTP senden
-    echo "Backup erfolgreich auf S3 hochgeladen." 
     # Telegram-Benachrichtigung senden
     send_telegram_message "Erfolg!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: S3-Mailcow-Backup-Upload"
 else
     echo "Fehler beim Hochladen des Backups auf S3."
-    # E-Mail-Benachrichtigung über SMTP senden
-    echo "Backup-Prozess auf mail.johanneskr.de fehlgeschlagen."
     # Telegram-Benachrichtigung senden
     send_telegram_message "Fehlgeschlagen!%0AServer: mail.johanneskr.de%0ATime: $timestamp%0AApplication: S3-Mailcow-Backup-Upload"
     exit 0
