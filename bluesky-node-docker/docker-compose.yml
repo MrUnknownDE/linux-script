@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  bluesky-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app  # Mount directory on the host
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  bluesky-node:
+    driver: local
